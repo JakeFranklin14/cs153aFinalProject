@@ -1,7 +1,7 @@
 import React from 'react';
 import {Pressable, Text, Alert, StyleSheet, View } from 'react-native';
 
-const Shutter = () => {
+const Gallery = () => {
     return (
     <View> 
         <Pressable style={styles.button} onPress={() => Alert.alert('Gallery Pressed!')}>
@@ -11,12 +11,12 @@ const Shutter = () => {
     );
 };
 
-export default Shutter;
+export default Gallery;
 
 const styles = StyleSheet.create({
     button: {
-      width: 50,
-      height: 50,
+      width: 60,
+      height: 60,
       justifyContent: 'center',
       alignSelf: 'center',
       alignItems: 'center',

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Pressable, Text, Alert, StyleSheet, View } from 'react-native';
+import { Pressable, Text, Alert, StyleSheet, View } from 'react-native';
 
 const ExpandableValues = ({name}) => {
     return (
