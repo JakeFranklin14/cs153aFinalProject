@@ -35,7 +35,7 @@ export default function App() {
             <Slider
                 style={styles.slider}
                 minimumValue={0}
-                maximumValue={0.2}
+                maximumValue={0.075}
                 minimumTrackTintColor="#FFFFFF"
                 maximumTrackTintColor="#000000"
                 onValueChange={(value) => {setCamZoom(value)}}
@@ -73,11 +73,10 @@ export default function App() {
         right: 10,
     },
     slider: {
-
-        position: 'absolute',
-        right: -70,
-        width: 200,
-        height: 40,
+      position: 'absolute',
+      bottom: 4,
+      width: 200,
+      height: 40,
     }
   });
   

@@ -5,7 +5,7 @@ import ExpandableValues, { Temperature } from './ExpandableValues';
 const AutoMetaData = () => {
   return (
     <View
-      style={{flex:4,flexDirection: 'column'}}>
+      style={{flex:3,flexDirection: 'column'}}>
       <View style={{ flex: 0.2, backgroundColor: 'black' }} />
       <View style={{ flex: 2, backgroundColor: 'black'}}>
         <View
