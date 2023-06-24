@@ -7,23 +7,23 @@ import Slider from '@react-native-community/slider';
 
 export default function App() {
     const [type, setType] = useState(CameraType.back);
-    const [permission, requestPermission] = Camera.useCameraPermissions();
+    // const [permission, requestPermission] = Camera.useCameraPermissions();
     const [camZoom, setCamZoom] = useState(0);
   
-    if (!permission) {
-      // Camera permissions are still loading
-      return <View />;
-    }
+    // if (!permission) {
+    //   // Camera permissions are still loading
+    //   return <View />;
+    // }
   
-    if (!permission.granted) {
-      // Camera permissions are not granted yet
-      return (
-        <View style={styles.container}>
-          <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
-          <Button onPress={requestPermission} title="grant permission" />
-        </View>
-      );
-    }
+    // if (!permission.granted) {
+    //   // Camera permissions are not granted yet
+    //   return (
+    //     <View style={styles.container}>
+    //       <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
+    //       <Button onPress={requestPermission} title="grant permission" />
+    //     </View>
+    //   );
+    // }
   
     function toggleCameraType() {
       setType(current => (current === CameraType.back ? CameraType.front : CameraType.back));

@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { View, StyleSheet, Button, Text, SafeAreaView, Pressable } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Dialog from "react-native-dialog";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import {useKey} from "./Keys"; 
 
 const Settings = () => {
-    const [AIkey, setAIkey] = useState("");
-    const [weatherKey, setWeatherKey] = useState("");
+    const [getAIkey, setAIkey] = useState("");
+    const [getWeatherKey, setWeatherKey] = useState("");
+    const {currentKey, setCurrentKey} = useKey();
     
     useEffect(() => {getData()},[])
 
@@ -17,13 +19,15 @@ const Settings = () => {
         let data = null;
         if (jsonValue != null) {
             data = JSON.parse(jsonValue);
-            setAIkey(data.AIkey);
-            setWeatherKey(data.weatherKey);
+            setAIkey(data.AIKey);
+            setWeatherKey(data.WeatherKey);
+            setCurrentKey({ AIContext: data.AIKey, WeatherContext: data.WeatherKey });
             console.log("just set APIkey");
         } else {
             console.log("just read a null value from Storage");
             // this happens the first time the app is loaded
             // as there is nothing in storage...
+            setCurrentKey({ AIContext: "", WeatherContext: "" })
             setAIkey("");
             setWeatherKey("");
         }
@@ -37,9 +41,9 @@ const Settings = () => {
     };
 
 
-    const storeData = async (AIkey, weatherKey) => {
+    const storeData = async (AIKey, WeatherKey) => {
         try {
-        const jsonValue = JSON.stringify(AIkey, weatherKey);
+        const jsonValue = JSON.stringify(AIKey, WeatherKey);
         await AsyncStorage.setItem("APIkey", jsonValue);
         console.log("just stored " + jsonValue);
         } catch (e) {
@@ -76,8 +80,8 @@ const Settings = () => {
     };
 
     const handleOK = () => {
-        storeData({ APIkey: weatherKey });
-        storeData({ APIkey: AIkey });
+        let key = {AIKey: getAIkey, WeatherKey: getWeatherKey};
+        storeData(key);
         setAIVisible(false);
         setWeatherVisible(false);
     };
@@ -86,7 +90,7 @@ const Settings = () => {
     <SafeAreaView style={styles.container}>
         <View style={styles.container}>
             <View style={styles.settingItem}>
-                <Text style={styles.text}>AI key: {AIkey}</Text>
+                <Text style={styles.text}>AI key: {getAIkey}</Text>
                 <Pressable onPress={showDialogAI}>
                 <FontAwesome 
                     name="edit"
@@ -101,13 +105,15 @@ const Settings = () => {
                             placeholder="Enter API key"
                             >
                         </Dialog.Input>
-
-                    <Dialog.Button label="OK" onPress={handleOK} />
+                    <Dialog.Button label="Save" onPress={() => {
+                        handleOK(); 
+                        setCurrentKey({ AIContext: getAIkey, WeatherContext: getWeatherKey });
+                        }} />
                     <Dialog.Button label="Cancel" onPress={handleCancel} />
                 </Dialog.Container>
             </View>
             <View style={styles.settingItem}>
-                <Text style={styles.text}>Weather key: {weatherKey}</Text>
+                <Text style={styles.text}>Weather key: {getWeatherKey}</Text>
                 <Pressable onPress={showDialogWeather}>
                 <FontAwesome 
                     name="edit"
@@ -122,8 +128,10 @@ const Settings = () => {
                             placeholder="Enter weather key"
                             >
                         </Dialog.Input>
-
-                    <Dialog.Button label="OK" onPress={handleOK} />
+                    <Dialog.Button label="Save" onPress={() => {
+                        handleOK(); 
+                        setCurrentKey({ AIContext: getAIkey, WeatherContext: getWeatherKey });
+                        }} />
                     <Dialog.Button label="Cancel" onPress={handleCancel} />
                 </Dialog.Container>
             </View>
@@ -133,21 +141,20 @@ const Settings = () => {
         <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
             <View style={styles.button}>
                 <Button
-                title="Save"
-                color="blue"
+                title="Clear All"
+                color="red"
                 onPress={() => {
-                    let key = {AIkey: AIkey, weatherKey: weatherKey};
-                    console.log("the API key is ", key);
-                    storeData(key);
-                    }}
+                    clearAll();
+                    setCurrentKey({ AIKey: "", WeatherKey: "" });
+                }}
                 />
             </View>
             <View style={styles.button}>
                 <Button
-                title="Clear Data"
-                color="red"
+                title="Log"
+                color="white"
                 onPress={() => {
-                    clearAll();
+                    console.log(currentKey);
                 }}
                 />
             </View>

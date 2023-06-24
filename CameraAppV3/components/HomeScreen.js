@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, View, StyleSheet, Alert, SafeAreaView } from 'react-native';
 import ManualMetaData from './ManualMetaData';
 import AutoMetaData from './AutoMetaData';
@@ -7,6 +7,8 @@ import Shutter from './Shutter';
 import Gallery from './Gallery';
 import ScrollPicker from 'react-native-wheel-scrollview-picker';
 import CameraView from './CameraView';
+import { useKey } from './Keys';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Selector = () => {
   return (
@@ -50,6 +52,37 @@ export function Mode (cameraMode) {
 }
 
 const App = () => {
+
+  const {setCurrentKey} = useKey();
+
+  const getData = async () => {
+    try {
+    // the '@profile_info' can be any string
+    const jsonValue = await AsyncStorage.getItem("APIkey");
+    let data = null;
+    if (jsonValue != null) {
+        data = JSON.parse(jsonValue);
+        setCurrentKey({ AIContext: data.AIKey, WeatherContext: data.WeatherKey });
+        console.log("just set APIkey");
+    } else {
+        console.log("just read a null value from Storage");
+        // this happens the first time the app is loaded
+        // as there is nothing in storage...
+        setCurrentKey({ AIContext: "", WeatherContext: "" })
+        setAIkey("");
+        setWeatherKey("");
+    }
+    } catch (e) {
+    console.log("error in getData ");
+    // this shouldn't happen, but its good practice
+    // to check for errors!
+    console.dir(e);
+    // error reading value
+    }
+};
+
+  useEffect(() => {getData()},[])
+
   return (
     <SafeAreaView style={styles.safe}>
     <View

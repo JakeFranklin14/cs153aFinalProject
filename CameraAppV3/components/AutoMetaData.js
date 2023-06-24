@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet} from 'react-native';
-import ExpandableValues, { Temperature } from './ExpandableValues';
+import ExpandableValues, { Temperature, Location, Weather, CameraDevice, AI } from './ExpandableValues';
 
 const AutoMetaData = () => {
   return (
@@ -11,10 +11,10 @@ const AutoMetaData = () => {
         <View
           style={styles.dataRow}>
           <View style={{ flex: 1 }}>
-            <ExpandableValues name= 'Camera Type' />
+            <CameraDevice />
           </View>
           <View style={{ flex: 1 }}>
-            <ExpandableValues name= 'Weather' />
+            <Weather />
           </View>
           <View style={{ flex: 1 }}>
             <ExpandableValues name= 'Scene Type' />
@@ -50,14 +50,14 @@ const AutoMetaData = () => {
             <ExpandableValues name= 'Shutter Speed' />
           </View>
           <View style={{ flex: 1 }}>
-            <ExpandableValues name= 'Location' />
+            <Location/>
           </View>
           <View style={{ flex: 1 }}>
             <ExpandableValues name= 'Time' />
           </View>
         </View>
         <View style={{ flex: 2, alignItems: 'center'}}>
-            <ExpandableValues name= 'AI' />
+            <AI/>
         </View>
       </View>
     </View>
