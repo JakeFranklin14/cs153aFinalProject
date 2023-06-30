@@ -5,7 +5,9 @@ import AutoMetaData from './AutoMetaData';
 import AIMetaData from './AIMetaData';
 import CameraView from './CameraView';
 
+
 const App = () => {
+  
   return (
     <SafeAreaView style={styles.safe}>
     <View
@@ -16,7 +18,7 @@ const App = () => {
         },
       ]}>
       <View style={{ flex: 2, backgroundColor: 'black' }}>
-        <AutoMetaData />
+      <AutoMetaData />
       </View>
       <CameraView />
     </View>

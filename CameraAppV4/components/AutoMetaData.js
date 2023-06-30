@@ -6,7 +6,7 @@ const AutoMetaData = () => {
   return (
     <View
       style={{flex:2.5,flexDirection: 'column'}}>
-      <View style={{ flex: 0.2, backgroundColor: 'black'}}/>
+      <View style={{ flex: 0.1, backgroundColor: 'black'}}/>
       <View style={{ flex: 2, backgroundColor: 'black'}}>
         <View
           style={styles.dataRow}>
@@ -56,7 +56,7 @@ const AutoMetaData = () => {
             <Time/>
           </View>
         </View>
-        <View style={{ flex: 2, alignItems: 'center'}}>
+        <View style={{ flex: 1, alignItems: 'center'}}>
             <AI/>
         </View>
       </View>

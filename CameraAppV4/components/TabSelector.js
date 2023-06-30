@@ -1,11 +1,15 @@
 import React from 'react';
 import { View } from 'react-native';
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from "@expo/vector-icons";
+import * as Haptics from 'expo-haptics';
+
 import MainScreen from './HomeScreen';
 import Settings from './Settings';
-import { Ionicons } from "@expo/vector-icons";
 import Keys from './Keys';
+
 
 
 function HomeScreen() {
@@ -23,7 +27,7 @@ function SettingsScreen() {
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-  const keyData = { AIContext: '', WeatherContext:  ''};
+  const keyData = { AIContext: '', WeatherContext:  '', CameraDeviceContext: ''};
 
   return (
     <Keys value={keyData} >

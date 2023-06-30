@@ -2,26 +2,43 @@ import React, { useState, useEffect } from 'react';
 import { Pressable, Text, Alert, StyleSheet, View } from 'react-native';
 import Dialog from "react-native-dialog";
 import { getCurrentPositionAsync } from 'expo-location';
-import { manufacturer } from 'expo-device';
+import { manufacturer, modelName } from 'expo-device';
 import moment from 'moment';
-
 
 const ExpandableValues = ({name}) => {
     return (
     <View> 
         <Pressable style={styles.metadata} onPress={() => Alert.alert('More ' + name + ' info')}>
-            <Text style={styles.text}>{name}:</Text>
+            <Text style={styles.text}>{name}: N/A </Text>
         </Pressable>
     </View>
     );
 };
 
 const CameraDevice = () => {
+    const [dialogVisible, setDialogVisible] = useState(false);
+
+
+    const showDialog = () => {
+        setDialogVisible(true);
+    };
+
+    const handleOK = () => {
+        setDialogVisible(false);
+    };
+
     return (
         <View>
-            <Pressable style={styles.metadata} onPress={() => Alert.alert('More Camera Type info')}>
-                <Text style={styles.text}>Camera Type: {manufacturer}</Text>
+            <Pressable style={styles.metadata} onPress={showDialog}>
+                <Text style={styles.text}>Camera Type: {manufacturer} </Text>
             </Pressable>
+            <Dialog.Container visible={dialogVisible}>
+                <Dialog.Title>Camera Info</Dialog.Title>
+                <Dialog.Description>
+                    You are using an {modelName}.
+                </Dialog.Description>
+                <Dialog.Button label="OK" onPress={handleOK} />
+            </Dialog.Container>
         </View>
     );
 };
@@ -187,11 +204,11 @@ return (
 };
 
 const Time = () => {
-    const [time, setTime] = useState(moment().format('h:mm a'));
+    const [time, setTime] = useState(moment().format('h:mm:ss a'));
 
     useEffect(() => {
       const interval = setInterval(() => {
-        setTime(moment().format('h:mm a'));
+        setTime(moment().format('h:mm:ss a'));
       }, 1000);
   
       return () => clearInterval(interval);
