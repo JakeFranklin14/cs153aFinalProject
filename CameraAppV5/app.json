@@ -1,0 +1,70 @@
+{
+  "expo": {
+    "name": "CameraAppV5",
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow JF Camera to access your camera."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow JF Camera to use your location."
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow JF Camera to access your photos.",
+          "savePhotosPermission": "Allow JF Camera to save photos.",
+          "isAccessMediaLocationEnabled": true
+        }
+      ]
+    ],
+    "slug": "CameraAppV5",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "Allow AI Camera to access your photos.",
+        "NSPhotoLibraryAddUsageDescription": "Allow AI Camera to save photos.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "This app uses location to get correct time and geocoordinates.",
+        "NSCameraUsageDescription": "This app uses the camera to take pictures."
+      },
+      "bundleIdentifier": "com.jfrank49.CameraAppV5"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.ACCESS_MEDIA_LOCATION"
+      ],
+      "package": "com.jfrank49.CameraAppV5"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a58e407a-3d72-47d4-95a0-ca58e2701466"
+      }
+    }
+  }
+}
